@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "./SearchBar";
 import youtube from "../api/youtube";
+import SearchBar from "./SearchBar";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
 
@@ -14,10 +14,22 @@ class App extends React.Component {
         this.onVideoSelect = this.onVideoSelect.bind(this);
     }
 
+    componentDidMount() {
+        /*
+        What should the default loading behaviour be?
+        Should it be an arbitrarily chosen video? Currently,
+        the default behavior is 'Loading...' plain text, which is
+        undesirable
+        */
+    }
+
     async onSearchSubmit(term) {
         const response = await youtube.get("/search", { params: { q: term } });
 
-        this.setState({ videos: response.data.items });
+        this.setState({
+            videos: response.data.items,
+            selectedVideo: response.data.items[0]
+        });
     }
 
     onVideoSelect(video) {

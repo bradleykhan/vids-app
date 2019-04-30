@@ -5,12 +5,14 @@ const VideoDetail = props => {
         return <div>Loading..</div>;
     }
 
-    const videoSrc = `https://www.youtube.com/embed/${props.video.id.videoId}`;
+    const videoSrc = `https://www.youtube.com/embed/${
+        props.video.id.videoId
+    }?autoplay=1`;
 
     return (
         <div>
             <div className="ui embed">
-                <iframe title="Video Player" src={videoSrc} />
+                <iframe title="Video Player" src={videoSrc} allow="autoplay" />
             </div>
             <div className="ui segment">
                 <h4 className="ui header">{props.video.snippet.title}</h4>
